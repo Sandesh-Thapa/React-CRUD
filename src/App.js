@@ -1,26 +1,30 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from 'react'
+import Add from './components/Add'
+import View from  './components/View'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import {Container, Input} from 'semantic-ui-react'
+
+
+export default class App extends Component {
+  state = {
+    users:[
+      { id: 1, name: "Sandesh Thapa", username: "sandeshthapa"},
+      { id: 2, name: "John Doe", username: "johndoe"},
+      { id: 3, name: "Ram Bahadur", username: "rambah"},
+      { id: 4, name: "Sita Sita", username: "sitasita"},
+    ]
+  }
+  handleChange = (e) =>{
+    console.log(e.target.value)
+  }
+  render() {
+    const {users} = this.state
+    return (
+      <Container>
+        <Add />
+        <Input icon="search" placeholder="search" onChange={this.handleChange}></Input>
+        <View data={users} />
+      </Container>
+    )
+  }
 }
-
-export default App;
