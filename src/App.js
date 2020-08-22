@@ -12,18 +12,38 @@ export default class App extends Component {
       { id: 2, name: "John Doe", username: "johndoe"},
       { id: 3, name: "Ram Bahadur", username: "rambah"},
       { id: 4, name: "Sita Sita", username: "sitasita"},
-    ]
+    ],
+    query: '',
+    results: [],
   }
+
   handleChange = (e) =>{
-    console.log(e.target.value)
-  }
-  render() {
+    const value = e.target.value
     const {users} = this.state
+    this.setState({ query: value })
+    const results = users.filter(user => {
+      const regex = new RegExp(value, "gi")
+      return user.name.match(regex)
+    })
+    //console.log(results)
+    this.setState({ results })
+  }
+
+  onFormSubmit = (user) =>{
+    const {users} = this.state
+    this.setState({
+      users:[...users, user]
+    })
+  }
+
+  render() {
+    const {users, results, query} = this.state
+    const data = results.length === 0 && !query ? users : results
     return (
       <Container>
-        <Add />
+        <Add onSubmit={this.onFormSubmit} />
         <Input icon="search" placeholder="search" onChange={this.handleChange}></Input>
-        <View data={users} />
+        <View data={data} />
       </Container>
     )
   }

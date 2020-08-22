@@ -18,8 +18,8 @@ export default class View extends Component {
 
                     <Table.Body>
                         {
-                            data.map(user => 
-                                <Table.Row>
+                            data.map((user, i) => 
+                                <Table.Row key={i}>
                                     <Table.Cell>{user.name}</Table.Cell>
                                     <Table.Cell>{user.username}</Table.Cell>
                                     <Table.Cell>
