@@ -3,6 +3,9 @@ import Edit from './Edit'
 import {Table, Button} from 'semantic-ui-react'
 
 export default class View extends Component {
+    handleDelete = (id) => {
+        this.props.onDelete(id)
+    }
     render() {
         const {data} = this.props
         return (
@@ -18,13 +21,13 @@ export default class View extends Component {
 
                     <Table.Body>
                         {
-                            data.map((user, i) => 
-                                <Table.Row key={i}>
+                            data.map(user => 
+                                <Table.Row key={user.id}>
                                     <Table.Cell>{user.name}</Table.Cell>
                                     <Table.Cell>{user.username}</Table.Cell>
                                     <Table.Cell>
                                         <Button content="Edit"></Button>
-                                        <Button content="Delete"></Button>
+                                        <Button content="Delete" onClick={this.handleDelete.bind(this, user.id)}></Button>
                                     </Table.Cell>
                                 </Table.Row>
                             )

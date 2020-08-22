@@ -36,6 +36,13 @@ export default class App extends Component {
     })
   }
 
+  onUserDelete = (id) => {
+    const {users} = this.state
+    this.setState({
+      users: users.filter(user => user.id !== id),
+    }) 
+  }
+
   render() {
     const {users, results, query} = this.state
     const data = results.length === 0 && !query ? users : results
@@ -43,7 +50,7 @@ export default class App extends Component {
       <Container>
         <Add onSubmit={this.onFormSubmit} />
         <Input icon="search" placeholder="search" onChange={this.handleChange}></Input>
-        <View data={data} />
+        <View data={data} onDelete={this.onUserDelete}/>
       </Container>
     )
   }
