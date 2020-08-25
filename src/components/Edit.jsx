@@ -3,16 +3,17 @@ import { Modal, Form, Button } from 'semantic-ui-react'
 
 export default class Edit extends Component {
     state = {
-        id: this.props.id,
+        id: "",
         name: "",
         username: "",
     }
 
     componentDidUpdate(prevProps){
-        console.log(prevProps)
+        //console.log(prevProps)
         if(prevProps.id !== this.props.id){
             const user = this.props.getUserById(this.props.id)
             this.setState({
+                id: this.props.id,
                 name: user.name,
                 username: user.username,
             })

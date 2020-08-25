@@ -18,7 +18,7 @@ export default class Add extends Component {
     onFormSubmit = (e) => {
         e.preventDefault()
         this.props.onSubmit(this.state)
-        this.setState({name: '', username: '',})
+        this.setState({id: uuid(), name: '', username: '',})
     }
 
     render() {

@@ -1,21 +1,25 @@
 import React, { Component } from 'react'
 import Add from './components/Add'
 import View from  './components/View'
-
 import {Container, Input} from 'semantic-ui-react'
-
+import users from './api/users'
 
 export default class App extends Component {
   state = {
-    users:[
-      { id: 1, name: "Sandesh Thapa", username: "sandeshthapa"},
-      { id: 2, name: "John Doe", username: "johndoe"},
-      { id: 3, name: "Ram Bahadur", username: "rambah"},
-      { id: 4, name: "Sita Sita", username: "sitasita"},
-    ],
+    users:[],
     query: '',
     results: [],
   }
+
+  componentDidMount(){
+    this.fetchdata()
+  }
+
+  fetchdata = async () => {
+    const Response = await users.get('/users')
+    this.setState({users: Response.data})
+  }
+
 
   handleChange = (e) =>{
     const value = e.target.value
@@ -29,18 +33,22 @@ export default class App extends Component {
     this.setState({ results })
   }
 
-  onFormSubmit = (user) =>{
-    const {users} = this.state
-    this.setState({
-      users:[...users, user]
-    })
+  onFormSubmit = async (user) =>{
+    // const {users} = this.state
+    // this.setState({
+    //   users:[...users, user]
+    // })
+    await users.post('/users', user)
+    this.fetchdata()
   }
 
-  onUserDelete = (id) => {
-    const {users} = this.state
-    this.setState({
-      users: users.filter(user => user.id !== id),
-    }) 
+  onUserDelete = async (id) => {
+    // const {users} = this.state
+    // this.setState({
+    //   users: users.filter(user => user.id !== id),
+    // })
+    await users.delete(`/users/${id}`)
+    this.fetchdata()
   }
 
   getUserById = (id) => {
@@ -49,11 +57,13 @@ export default class App extends Component {
     return user[0]
   }
 
-  onEdit = (id, updatedUser) => {
-    const {users} = this.state
-    this.setState({
-      users: users.map(user => user.id === id ? updatedUser : user)
-    })
+  onEdit = async (id, updatedUser) => {
+    // const {users} = this.state
+    // this.setState({
+    //   users: users.map(user => user.id === id ? updatedUser : user)
+    // })
+    await users.patch(`users/${id}`, updatedUser)
+    this.fetchdata()
   }
 
   render() {
