@@ -1,0 +1,24 @@
+{
+  "users": [
+    {
+      "id": "e39ee06a-2c1e-4ac3-ae3a-c0115f731b85",
+      "name": "Sandesh Thapa",
+      "username": "sandesh"
+    },
+    {
+      "id": "1defb691-6259-4a26-84dc-444957071e37",
+      "name": "Jean Doe",
+      "username": "jeandoe"
+    },
+    {
+      "id": "65c3b88c-5590-4291-b8d3-8e313fb1eb87",
+      "name": "New User",
+      "username": "newuser"
+    },
+    {
+      "id": "bb636866-c8b5-41f9-bc45-ed1db9489b38",
+      "name": "New User1",
+      "username": "newuser1"
+    }
+  ]
+}
